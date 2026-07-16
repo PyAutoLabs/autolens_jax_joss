@@ -26,6 +26,7 @@ on byte-identical data to its paired workspace example.
 """
 
 import json
+import os
 import platform
 import time
 import urllib.request
@@ -35,7 +36,10 @@ from pathlib import Path
 
 import numpy as np
 
-import os
+# Benchmarks time inference, not plotting: disable all search visualization
+# (mid-fit and final) so wall-clock numbers are pure. Importing `harness` in a
+# benchmark script sets this before any search runs.
+os.environ.setdefault("PYAUTO_SKIP_VISUALIZATION", "1")
 
 WORKSPACE_BRANCH = os.environ.get("AUTOLENS_WORKSPACE_BRANCH", "main")
 WORKSPACE_RAW_URL = (
