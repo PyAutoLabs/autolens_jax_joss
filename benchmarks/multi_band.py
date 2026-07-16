@@ -46,10 +46,15 @@ args = parser.parse_args()
 waveband_list = ["F115W", "F150W", "F277W", "F444W"]
 pixel_scale_dict = {"F115W": 0.03, "F150W": 0.03, "F277W": 0.06, "F444W": 0.06}
 
+total_gaussians = 20
+mask_radius = 2.5
+
 if args.quick:
     args.n_starts, args.n_steps = 2, 5
     args.batch_size = 1
     waveband_list = ["F277W", "F444W"]
+    total_gaussians = 10
+    mask_radius = 1.2  # keeps the factor-graph gradient compile inside laptop RAM
 
 bench = harness.Benchmark(
     name="multi_band",
@@ -65,7 +70,6 @@ __Dataset__
 Identical loading to the paired multi/start_here.py: per-band pixel scales,
 extra-galaxies noise scaling, 2.5" mask and radially-binned over sampling.
 """
-mask_radius = 2.5
 dataset_list = []
 
 with bench.phase("dataset"):
@@ -115,14 +119,14 @@ the first.
 """
 with bench.phase("model"):
     bulge = al.model_util.mge_model_from(
-        mask_radius=mask_radius, total_gaussians=20, centre_prior_is_uniform=True
+        mask_radius=mask_radius, total_gaussians=total_gaussians, centre_prior_is_uniform=True
     )
     mass = af.Model(al.mp.Isothermal)
     shear = af.Model(al.mp.ExternalShear)
     lens = af.Model(al.Galaxy, redshift=0.5, bulge=bulge, mass=mass, shear=shear)
 
     bulge = al.model_util.mge_model_from(
-        mask_radius=mask_radius, total_gaussians=20, centre_prior_is_uniform=False
+        mask_radius=mask_radius, total_gaussians=total_gaussians, centre_prior_is_uniform=False
     )
     source = af.Model(al.Galaxy, redshift=1.0, bulge=bulge)
 
