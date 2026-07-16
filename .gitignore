@@ -1,0 +1,12 @@
+# Datasets are fetched on first run and cached here — never committed.
+dataset/
+
+# Model-fit output written by the searches.
+output/
+
+# Quick-mode (smoke) results are not official.
+results/quick/
+
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
