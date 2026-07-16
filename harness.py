@@ -220,7 +220,27 @@ class Benchmark:
         ``n_likelihood_evals`` where the search's accounting is known (e.g.
         ``n_starts * n_steps``); otherwise it is taken from the result's
         samples where possible.
+
+        Any previous output of this benchmark's search is deleted first: a
+        benchmark must never resume a partial earlier run — resumed fits give
+        meaningless timings (and a crashed run's stale state fails PyAutoFit's
+        figure-of-merit resume check).
         """
+        import shutil
+
+        try:
+            search_dir = (
+                Path("output")
+                / (search.path_prefix or "")
+                / (search.unique_tag or "")
+                / search.name
+            )
+            if search_dir.exists():
+                shutil.rmtree(search_dir)
+                print(f"[harness] cleared previous output at {search_dir}")
+        except (AttributeError, OSError) as e:
+            print(f"[harness] could not clear previous output ({e}) — continuing")
+
         t0 = time.perf_counter()
         result = search.fit(model=model, analysis=analysis)
         self.record["search_wall_s"] = round(time.perf_counter() - t0, 3)
