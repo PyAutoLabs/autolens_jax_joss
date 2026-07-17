@@ -61,7 +61,7 @@ if args.quick:
     mask_radius = 1.6
 
 bench = harness.Benchmark(
-    name="imaging",
+    name="imaging" + ("_nautilus" if args.search == "nautilus" else ""),
     paired_example="scripts/imaging/start_here.py",
     description="Galaxy-scale JWST COSMOS-Web Ring F150W imaging: MGE lens light "
     "subtraction + SIE+shear mass + pixelized source reconstruction.",

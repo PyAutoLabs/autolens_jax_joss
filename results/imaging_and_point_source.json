@@ -1,0 +1,45 @@
+{
+  "compile_s": 38.803,
+  "warm_batch_eval_s": 0.0217,
+  "compile_measure_n_parallel": 50,
+  "compile_measure_map_batch_size": null,
+  "search_wall_s": 7735.55,
+  "n_likelihood_evals": 389421,
+  "max_log_likelihood": -9666161.34,
+  "benchmark": "imaging_and_point_source",
+  "paired_example": "scripts/multi/features/imaging_and_point_source/modeling.py",
+  "description": "RXJ1131-1231 joint fit: HST H-band arcs + image positions + time delays, one SIE+shear mass model.",
+  "quick": false,
+  "date": "2026-07-17 07:03 UTC",
+  "total_wall_s": 7778.031,
+  "phases": {
+    "dataset": 0.966,
+    "model": 1.83
+  },
+  "hardware": {
+    "backend": "gpu",
+    "device": "NVIDIA A100 80GB PCIe",
+    "device_count": 1,
+    "hostname": "euclid-ral-gpu-2",
+    "python": "3.12.4"
+  },
+  "versions": {
+    "jax": "0.10.2",
+    "autoconf": "2026.7.9.1",
+    "autofit": "2026.7.9.1",
+    "autoarray": "2026.7.9.1",
+    "autogalaxy": "2026.7.9.1",
+    "autolens": "2026.7.9.1"
+  },
+  "post_compile_s": 7696.747,
+  "search_info": {
+    "type": "Nautilus",
+    "n_live": 150,
+    "n_batch": 50
+  },
+  "model_info": {
+    "mass": "Isothermal + ExternalShear (shared across factors)",
+    "imaging": "HST H-band arcs, MGE lens light + MGE source",
+    "point": "4 positions + 3 relative time delays"
+  }
+}
