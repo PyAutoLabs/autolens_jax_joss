@@ -6,3 +6,9 @@ do not edit by hand. Quick-mode runs are excluded (they live in
 
 | Benchmark | Paired example | Device | Search | Likelihood evals | Compile (s) | Post-compile (s) | Total (min) | Max logL | Date |
 |---|---|---|---|---|---|---|---|---|---|
+| cluster | `scripts/cluster/start_here.py` | NVIDIA A100 80GB PCIe | Nautilus | 271216 | 5414.62 | 15651.273 | 442.02 | -5088.52 | 2026-07-16 21:27 UTC |
+| group | `scripts/group/start_here.py` | NVIDIA A100 80GB PCIe | MultiStartAdam | 4800 | 40.585 | 421.963 | 8.44 | 13931.41 | 2026-07-16 13:54 UTC |
+| imaging | `scripts/imaging/start_here.py` | NVIDIA A100 80GB PCIe | MultiStartAdam | 4800 | 34.964 | 525.505 | 10.02 | -30450186.72 | 2026-07-16 14:05 UTC |
+| point_source | `scripts/point_source/start_here.py` | NVIDIA A100 80GB PCIe | Nautilus | 13100 | 26.422 | 303.496 | 5.95 | -50.17 | 2026-07-16 13:45 UTC |
+| strong_and_weak | `scripts/weak/features/strong_lensing/a2744.py` | NVIDIA A100 80GB PCIe | Nautilus | 231401 | 5836.179 | 19157.826 | 514.65 | -8319.27 | 2026-07-17 04:51 UTC |
+| weak | `scripts/weak/start_here.py` | NVIDIA A100 80GB PCIe | MultiStartAdam | 4800 | 3.908 | 36.475 | 0.75 | -293.74 | 2026-07-16 20:21 UTC |

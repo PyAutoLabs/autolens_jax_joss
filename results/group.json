@@ -1,0 +1,47 @@
+{
+  "compile_s": 40.585,
+  "warm_batch_eval_s": 0.03,
+  "compile_measure_n_parallel": 16,
+  "compile_measure_map_batch_size": null,
+  "search_wall_s": 462.548,
+  "n_likelihood_evals": 4800,
+  "max_log_likelihood": 13931.41,
+  "benchmark": "group",
+  "paired_example": "scripts/group/start_here.py",
+  "description": "Real Euclid group-scale lens (HST imaging): per-galaxy MGE light + isothermal mass for each main lens galaxy, MGE source.",
+  "quick": false,
+  "date": "2026-07-16 13:54 UTC",
+  "total_wall_s": 506.263,
+  "phases": {
+    "dataset": 1.429,
+    "model": 1.114
+  },
+  "hardware": {
+    "backend": "gpu",
+    "device": "NVIDIA A100 80GB PCIe",
+    "device_count": 1,
+    "hostname": "euclid-ral-gpu-2",
+    "python": "3.12.4"
+  },
+  "versions": {
+    "jax": "0.10.2",
+    "autoconf": "2026.7.9.1",
+    "autofit": "2026.7.9.1",
+    "autoarray": "2026.7.9.1",
+    "autogalaxy": "2026.7.9.1",
+    "autolens": "2026.7.9.1"
+  },
+  "post_compile_s": 421.963,
+  "search_info": {
+    "type": "MultiStartAdam",
+    "n_starts": 16,
+    "n_steps": 300,
+    "batch_size": null
+  },
+  "model_info": {
+    "main_lens_galaxies": 1,
+    "lens": "per-galaxy MGE(20) + Isothermal (+ shear on lens_0)",
+    "source": "MGE(20) bulge",
+    "mask_radius_arcsec": 3.7
+  }
+}

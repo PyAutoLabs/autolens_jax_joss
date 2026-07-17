@@ -1,0 +1,45 @@
+{
+  "compile_s": 5836.179,
+  "warm_batch_eval_s": 0.1178,
+  "compile_measure_n_parallel": 50,
+  "compile_measure_map_batch_size": null,
+  "search_wall_s": 24994.005,
+  "n_likelihood_evals": 231401,
+  "max_log_likelihood": -8319.27,
+  "benchmark": "strong_and_weak",
+  "paired_example": "scripts/weak/features/strong_lensing/a2744.py",
+  "description": "Abell 2744 joint fit: 25 multiple images (7 multi-plane sources) + ~400 weak-lensing shear measurements constraining one cluster mass model.",
+  "quick": false,
+  "date": "2026-07-17 04:51 UTC",
+  "total_wall_s": 30879.09,
+  "phases": {
+    "dataset": 0.068,
+    "model": 3.307
+  },
+  "hardware": {
+    "backend": "gpu",
+    "device": "NVIDIA A100 80GB PCIe",
+    "device_count": 1,
+    "hostname": "euclid-ral-gpu-2",
+    "python": "3.12.4"
+  },
+  "versions": {
+    "jax": "0.10.2",
+    "autoconf": "2026.7.9.1",
+    "autofit": "2026.7.9.1",
+    "autoarray": "2026.7.9.1",
+    "autogalaxy": "2026.7.9.1",
+    "autolens": "2026.7.9.1"
+  },
+  "post_compile_s": 19157.826,
+  "search_info": {
+    "type": "Nautilus",
+    "n_live": 150,
+    "n_batch": 50
+  },
+  "model_info": {
+    "strong": "7 multi-plane point sources (25 images)",
+    "weak": "~400 reduced-shear measurements (effective z=1.0 plane)",
+    "mass_model": "2 dPIE BCGs + NFW host halo + 188-member scaling tier (shared)"
+  }
+}

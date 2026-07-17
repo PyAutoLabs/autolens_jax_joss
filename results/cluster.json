@@ -1,0 +1,54 @@
+{
+  "compile_s": 5414.62,
+  "warm_batch_eval_s": 0.1097,
+  "compile_measure_n_parallel": 50,
+  "compile_measure_map_batch_size": null,
+  "search_wall_s": 21065.893,
+  "n_likelihood_evals": 271216,
+  "max_log_likelihood": -5088.52,
+  "benchmark": "cluster",
+  "paired_example": "scripts/cluster/start_here.py",
+  "description": "Abell 2744 (Bergamini+23 inputs): 7 gold multi-plane source systems, 2 dPIE BCGs + 188 scaling members + NFW host halo.",
+  "quick": false,
+  "date": "2026-07-16 21:27 UTC",
+  "total_wall_s": 26520.994,
+  "phases": {
+    "dataset": 1.192,
+    "model": 3.251
+  },
+  "hardware": {
+    "backend": "gpu",
+    "device": "NVIDIA A100 80GB PCIe",
+    "device_count": 1,
+    "hostname": "euclid-ral-gpu-2",
+    "python": "3.12.4"
+  },
+  "versions": {
+    "jax": "0.10.2",
+    "autoconf": "2026.7.9.1",
+    "autofit": "2026.7.9.1",
+    "autoarray": "2026.7.9.1",
+    "autogalaxy": "2026.7.9.1",
+    "autolens": "2026.7.9.1"
+  },
+  "post_compile_s": 15651.273,
+  "search_info": {
+    "type": "Nautilus",
+    "n_live": 150,
+    "n_batch": 50
+  },
+  "model_info": {
+    "sources": 7,
+    "images": 24,
+    "scaling_members": 188,
+    "tiers": "2 dPIE BCGs + NFW host halo + scaling tier + 7 Point sources",
+    "source_redshifts": [
+      1.688,
+      1.887,
+      2.017,
+      3.577,
+      5.284,
+      5.662
+    ]
+  }
+}
