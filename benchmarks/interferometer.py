@@ -12,9 +12,13 @@ reconstruction.
 autolens_workspace#281).
 
 **Data:** the calibrated measurement sets are public but require a one-off
-CASA export — see `data_prep/sdp81/README.md`. Once exported (or hosted),
-place the FITS files in `dataset/interferometer/sdp81/` or set `SDP81_URL`
-below to a public deposit and they are fetched automatically.
+CASA export producing three averaging levels of the same dataset — see
+`data_prep/sdp81/README.md`. Averaging keeps the long baselines, so every
+level is genuinely ~25-30 mas resolution (real-space mask at 0.025"/pixel);
+only the visibility count changes. `--nvis {default,mid,full}` selects the
+level; running all three documents that per-evaluation runtime is ~flat in
+N_vis. Place the exported folders under `dataset/interferometer/` or set
+`SDP81_URL` to a public deposit.
 
 Run:
 
@@ -48,18 +52,26 @@ parser.add_argument("--n-starts", type=int, default=16)
 parser.add_argument("--n-steps", type=int, default=300)
 parser.add_argument("--batch-size", type=int, default=4)
 parser.add_argument("--mesh-pixels", type=int, default=30)
+parser.add_argument(
+    "--nvis",
+    choices=["default", "mid", "full"],
+    default="default",
+    help="averaging level: ~50k (default), ~500k (mid), >1M (full) visibilities",
+)
 args = parser.parse_args()
 
 if args.quick:
     args.n_starts, args.n_steps, args.mesh_pixels = 2, 5, 10
     args.batch_size = 1
 
-dataset_path = harness.DATASET_DIR / "interferometer" / "sdp81"
+DATASET_FOLDER = {"default": "sdp81", "mid": "sdp81_mid", "full": "sdp81_full"}[args.nvis]
+
+dataset_path = harness.DATASET_DIR / "interferometer" / DATASET_FOLDER
 
 if not all((dataset_path / f).exists() for f in FILES):
     if SDP81_URL is not None:
         for f in FILES:
-            harness.fetch_url(f"{SDP81_URL}/{f}", "interferometer/sdp81", f)
+            harness.fetch_url(f"{SDP81_URL}/{DATASET_FOLDER}/{f}", f"interferometer/{DATASET_FOLDER}", f)
     else:
         sys.exit(
             "SDP.81 visibility FITS files not found in dataset/interferometer/sdp81/.\n"
@@ -69,7 +81,7 @@ if not all((dataset_path / f).exists() for f in FILES):
         )
 
 bench = harness.Benchmark(
-    name="interferometer",
+    name="interferometer" + ("" if args.nvis == "default" else f"_{args.nvis}"),
     paired_example="scripts/interferometer/start_here.py",
     description="ALMA SDP.81 long-baseline visibilities (>1M): SIE+shear mass + "
     "pixelized source reconstruction in the uv-plane.",
@@ -79,12 +91,14 @@ bench = harness.Benchmark(
 """
 __Dataset__
 
-A 3.5" real-space mask defines the region the source reconstruction maps; the
-likelihood is computed in the visibility domain against all visibilities.
+A 3.5" real-space mask at 0.025"/pixel — the resolution the long-baseline
+data genuinely warrants at every averaging level — defines the region the
+source reconstruction maps; the likelihood is computed in the visibility
+domain against all visibilities.
 """
 with bench.phase("dataset"):
     real_space_mask = al.Mask2D.circular(
-        shape_native=(200, 200), pixel_scales=0.035, radius=3.5
+        shape_native=(300, 300), pixel_scales=0.025, radius=3.5
     )
 
     dataset = al.Interferometer.from_fits(
@@ -134,7 +148,7 @@ if args.search == "adam":
     search = af.MultiStartAdam(
         path_prefix=Path("jax_joss"),
         name="interferometer" + ("_quick" if args.quick else ""),
-        unique_tag="sdp81",
+        unique_tag=DATASET_FOLDER,
         n_starts=args.n_starts,
         n_steps=args.n_steps,
         batch_size=args.batch_size,
@@ -145,7 +159,7 @@ else:
     search = af.Nautilus(
         path_prefix=Path("jax_joss"),
         name="interferometer_nautilus" + ("_quick" if args.quick else ""),
-        unique_tag="sdp81",
+        unique_tag=DATASET_FOLDER,
         n_live=50 if args.quick else 100,
         n_batch=20,
         iterations_per_quick_update=10**9,
