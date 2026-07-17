@@ -22,9 +22,9 @@ import numpy as np
 #   int > 0    -> fixed-width channel average
 #   0          -> keep full spectral resolution
 LEVELS = [
-    ("sdp81", "60s", "collapse"),  # ~tens of k vis — the user-example / default
-    ("sdp81_mid", "6s", "collapse"),  # ~few x 100k vis
-    ("sdp81_full", "2s", 0),  # >1M vis — the paper's headline row
+    ("sdp81", "60s", "continuum"),  # ~200k vis, few MB — user-downloadable example
+    ("sdp81_mid", "30s", "collapse"),  # ~1M vis — mid scaling row
+    ("sdp81_full", "2s", 0),  # >1M vis — the paper's headline (full spectral res)
 ]
 
 
@@ -56,7 +56,11 @@ def export_level(ms_path, out_dir, timebin, chanbin):
         timebin=timebin,
         keepflags=False,
     )
-    if chanbin == "collapse":
+    if chanbin == "continuum":
+        # single continuum channel: merge spws, then average all channels to 1.
+        nchan = ms_channels(ms_path)
+        kwargs.update(combinespws=True, chanaverage=True, chanbin=sum(nchan))
+    elif chanbin == "collapse":
         # one continuum channel per spw: chanbin must equal that spw's nchan.
         nchan = ms_channels(ms_path)
         kwargs.update(chanaverage=True, chanbin=nchan if len(nchan) > 1 else nchan[0])
