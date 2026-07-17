@@ -22,7 +22,7 @@ import numpy as np
 #   int > 0    -> fixed-width channel average
 #   0          -> keep full spectral resolution
 LEVELS = [
-    ("sdp81", "60s", "continuum"),  # ~200k vis, few MB — user-downloadable example
+    ("sdp81", "240s", "continuum"),  # ~50k vis, few MB — user-downloadable example
     ("sdp81_mid", "30s", "collapse"),  # ~1M vis — mid scaling row
     ("sdp81_full", "2s", 0),  # >1M vis — the paper's headline (full spectral res)
 ]
@@ -132,5 +132,10 @@ if __name__ == "__main__":
     ms_paths = sys.argv[1:]
     ms_path = concat_if_needed(ms_paths)
     base = os.path.dirname(os.path.abspath(__file__))
-    for folder, timebin, chanbin in LEVELS:
+    # Optionally restrict to a subset of levels (comma-separated folder names),
+    # e.g. SDP81_LEVELS=sdp81 to re-tune just the small level without rebuilding
+    # the slow 18.5M full level.
+    wanted = os.environ.get("SDP81_LEVELS")
+    levels = LEVELS if not wanted else [l for l in LEVELS if l[0] in wanted.split(",")]
+    for folder, timebin, chanbin in levels:
         export_level(ms_path, os.path.join(base, folder), timebin, chanbin)
