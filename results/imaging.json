@@ -1,26 +1,26 @@
 {
-  "compile_s": 34.964,
-  "warm_batch_eval_s": 0.8538,
+  "compile_s": 45.28,
+  "warm_batch_eval_s": 0.8486,
   "compile_measure_n_parallel": 16,
   "compile_measure_map_batch_size": 4,
-  "search_wall_s": 560.469,
+  "search_wall_s": 560.432,
   "n_likelihood_evals": 4800,
-  "max_log_likelihood": -30450186.72,
+  "max_log_likelihood": -12841256.48,
   "benchmark": "imaging",
   "paired_example": "scripts/imaging/start_here.py",
   "description": "Galaxy-scale JWST COSMOS-Web Ring F150W imaging: MGE lens light subtraction + SIE+shear mass + pixelized source reconstruction.",
   "quick": false,
-  "date": "2026-07-16 14:05 UTC",
-  "total_wall_s": 601.207,
+  "date": "2026-07-17 06:40 UTC",
+  "total_wall_s": 610.879,
   "phases": {
-    "dataset": 1.127,
-    "model": 0.849
+    "dataset": 0.4,
+    "model": 0.857
   },
   "hardware": {
     "backend": "gpu",
     "device": "NVIDIA A100 80GB PCIe",
     "device_count": 1,
-    "hostname": "euclid-ral-gpu-2",
+    "hostname": "euclid-ral-gpu-1",
     "python": "3.12.4"
   },
   "versions": {
@@ -31,7 +31,7 @@
     "autogalaxy": "2026.7.9.1",
     "autolens": "2026.7.9.1"
   },
-  "post_compile_s": 525.505,
+  "post_compile_s": 515.152,
   "search_info": {
     "type": "MultiStartAdam",
     "n_starts": 16,

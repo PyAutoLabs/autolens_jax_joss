@@ -1,26 +1,26 @@
 {
-  "compile_s": 40.585,
-  "warm_batch_eval_s": 0.03,
+  "compile_s": 48.521,
+  "warm_batch_eval_s": 0.0298,
   "compile_measure_n_parallel": 16,
   "compile_measure_map_batch_size": null,
-  "search_wall_s": 462.548,
+  "search_wall_s": 332.676,
   "n_likelihood_evals": 4800,
   "max_log_likelihood": 13931.41,
   "benchmark": "group",
   "paired_example": "scripts/group/start_here.py",
   "description": "Real Euclid group-scale lens (HST imaging): per-galaxy MGE light + isothermal mass for each main lens galaxy, MGE source.",
   "quick": false,
-  "date": "2026-07-16 13:54 UTC",
-  "total_wall_s": 506.263,
+  "date": "2026-07-17 06:30 UTC",
+  "total_wall_s": 385.359,
   "phases": {
-    "dataset": 1.429,
-    "model": 1.114
+    "dataset": 0.428,
+    "model": 1.108
   },
   "hardware": {
     "backend": "gpu",
     "device": "NVIDIA A100 80GB PCIe",
     "device_count": 1,
-    "hostname": "euclid-ral-gpu-2",
+    "hostname": "euclid-ral-gpu-1",
     "python": "3.12.4"
   },
   "versions": {
@@ -31,7 +31,7 @@
     "autogalaxy": "2026.7.9.1",
     "autolens": "2026.7.9.1"
   },
-  "post_compile_s": 421.963,
+  "post_compile_s": 284.155,
   "search_info": {
     "type": "MultiStartAdam",
     "n_starts": 16,

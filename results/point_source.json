@@ -1,26 +1,26 @@
 {
-  "compile_s": 26.422,
+  "compile_s": 26.501,
   "warm_batch_eval_s": 0.0029,
   "compile_measure_n_parallel": 50,
   "compile_measure_map_batch_size": null,
-  "search_wall_s": 329.918,
-  "n_likelihood_evals": 13100,
-  "max_log_likelihood": -50.17,
+  "search_wall_s": 279.297,
+  "n_likelihood_evals": 12900,
+  "max_log_likelihood": -75.5,
   "benchmark": "point_source",
   "paired_example": "scripts/point_source/start_here.py",
   "description": "RXJ1131-1231 quad quasar: image positions (Suyu+13) + COSMOGRAIL time delays (Tewes+13), SIE+shear mass model.",
   "quick": false,
-  "date": "2026-07-16 13:45 UTC",
-  "total_wall_s": 357.296,
+  "date": "2026-07-17 06:23 UTC",
+  "total_wall_s": 310.961,
   "phases": {
     "dataset": 0.0,
-    "model": 0.479
+    "model": 2.648
   },
   "hardware": {
     "backend": "gpu",
     "device": "NVIDIA A100 80GB PCIe",
     "device_count": 1,
-    "hostname": "euclid-ral-gpu-2",
+    "hostname": "euclid-ral-gpu-1",
     "python": "3.12.4"
   },
   "versions": {
@@ -31,7 +31,7 @@
     "autogalaxy": "2026.7.9.1",
     "autolens": "2026.7.9.1"
   },
-  "post_compile_s": 303.496,
+  "post_compile_s": 252.796,
   "search_info": {
     "type": "Nautilus",
     "n_live": 75,
