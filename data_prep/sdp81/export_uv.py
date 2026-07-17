@@ -22,7 +22,8 @@ import numpy as np
 #   int > 0    -> fixed-width channel average
 #   0          -> keep full spectral resolution
 LEVELS = [
-    ("sdp81", "240s", "continuum"),  # ~50k vis, few MB — user-downloadable example
+    ("sdp81", "240s", "continuum"),  # ~108k vis, ~5MB — user-downloadable example
+    # (time-averaging floors ~80k here — set by scans; 240s is near that floor)
     ("sdp81_mid", "30s", "collapse"),  # ~1M vis — mid scaling row
     ("sdp81_full", "2s", 0),  # >1M vis — the paper's headline (full spectral res)
 ]
