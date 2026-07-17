@@ -35,14 +35,21 @@ def export_level(ms_path, out_dir, timebin, chanbin):
     kwargs = dict(
         vis=ms_path,
         outputvis=averaged,
-        datacolumn="corrected",
         timeaverage=True,
         timebin=timebin,
         keepflags=False,
     )
     if chanbin:
         kwargs.update(chanaverage=True, chanbin=chanbin)
-    mstransform(**kwargs)
+
+    # Split/calibrated SV deliveries usually carry the science data in DATA;
+    # fall back from CORRECTED to DATA automatically.
+    try:
+        mstransform(datacolumn="corrected", **kwargs)
+    except Exception:
+        if os.path.exists(averaged):
+            shutil.rmtree(averaged)
+        mstransform(datacolumn="data", **kwargs)
 
     ms = ms_tool()
     ms.open(averaged)
@@ -84,8 +91,21 @@ def export_level(ms_path, out_dir, timebin, chanbin):
     return vis_flat.size
 
 
+def concat_if_needed(ms_paths):
+    """SV deliveries can split observations across execution-block MSs."""
+    if len(ms_paths) == 1:
+        return ms_paths[0]
+    from casatasks import concat
+
+    combined = os.path.join(os.path.dirname(ms_paths[0]), "sdp81_combined.ms")
+    if not os.path.exists(combined):
+        concat(vis=ms_paths, concatvis=combined)
+    return combined
+
+
 if __name__ == "__main__":
-    ms_path = sys.argv[-1]
+    ms_paths = sys.argv[1:]
+    ms_path = concat_if_needed(ms_paths)
     base = os.path.dirname(os.path.abspath(__file__))
     for folder, timebin, chanbin in LEVELS:
         export_level(ms_path, os.path.join(base, folder), timebin, chanbin)
