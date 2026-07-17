@@ -16,12 +16,29 @@ import sys
 import numpy as np
 
 # (folder, timebin, chanbin) — averaging keeps the long baselines, so every
-# level is genuinely long-baseline resolution; only N_vis changes.
+# level is genuinely long-baseline resolution; only N_vis changes. `chanbin`:
+#   "collapse" -> average every channel into one continuum channel per spw
+#                 (N_vis = nspw x nrows; the small, user-downloadable levels)
+#   int > 0    -> fixed-width channel average
+#   0          -> keep full spectral resolution
 LEVELS = [
-    ("sdp81", "60s", 0),  # ~50k vis — the user-example / default benchmark level
-    ("sdp81_mid", "10s", 4),  # ~500k vis
+    ("sdp81", "60s", "collapse"),  # ~tens of k vis — the user-example / default
+    ("sdp81_mid", "6s", "collapse"),  # ~few x 100k vis
     ("sdp81_full", "2s", 0),  # >1M vis — the paper's headline row
 ]
+
+
+def ms_channels(ms_path):
+    """Per-spw channel counts (compute-node only — needs CASA measures data)."""
+    from casatools import msmetadata
+
+    msmd = msmetadata()
+    msmd.open(ms_path)
+    nchan = [int(msmd.nchan(i)) for i in range(msmd.nspw())]
+    nrows = int(msmd.nrows())
+    msmd.done()
+    print(f"MS structure: nspw={len(nchan)} nchan_per_spw={nchan} nrows={nrows}")
+    return nchan
 
 
 def export_level(ms_path, out_dir, timebin, chanbin):
@@ -39,7 +56,11 @@ def export_level(ms_path, out_dir, timebin, chanbin):
         timebin=timebin,
         keepflags=False,
     )
-    if chanbin:
+    if chanbin == "collapse":
+        # one continuum channel per spw: chanbin must equal that spw's nchan.
+        nchan = ms_channels(ms_path)
+        kwargs.update(chanaverage=True, chanbin=nchan if len(nchan) > 1 else nchan[0])
+    elif chanbin:
         kwargs.update(chanaverage=True, chanbin=chanbin)
 
     # Split/calibrated SV deliveries usually carry the science data in DATA;
