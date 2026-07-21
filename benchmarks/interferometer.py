@@ -56,7 +56,7 @@ parser.add_argument(
     "--nvis",
     choices=["default", "mid", "full"],
     default="default",
-    help="averaging level: ~50k (default), ~500k (mid), >1M (full) visibilities",
+    help="averaging level: ~108k (default), ~1.45M (mid), ~18.5M (full) visibilities",
 )
 args = parser.parse_args()
 
@@ -69,15 +69,19 @@ DATASET_FOLDER = {"default": "sdp81", "mid": "sdp81_mid", "full": "sdp81_full"}[
 dataset_path = harness.DATASET_DIR / "interferometer" / DATASET_FOLDER
 
 if not all((dataset_path / f).exists() for f in FILES):
-    if SDP81_URL is not None:
+    if args.nvis == "default":
+        # The ~108k-visibility continuum level ships with autolens_workspace, so
+        # fetch it from there on first run (as the other benchmarks do).
+        harness.fetch_workspace_dataset(f"interferometer/{DATASET_FOLDER}", FILES)
+    elif SDP81_URL is not None:
         for f in FILES:
             harness.fetch_url(f"{SDP81_URL}/{DATASET_FOLDER}/{f}", f"interferometer/{DATASET_FOLDER}", f)
     else:
         sys.exit(
-            "SDP.81 visibility FITS files not found in dataset/interferometer/sdp81/.\n"
-            "They require a one-off CASA export from the public ALMA Science Verification\n"
-            "measurement sets — see data_prep/sdp81/README.md for the two-step recipe\n"
-            "(or set SDP81_URL in this script to a deposit hosting the exported files)."
+            f"SDP.81 '{args.nvis}' visibility FITS not found in dataset/interferometer/{DATASET_FOLDER}/.\n"
+            "Only the ~108k-vis 'default' level ships with autolens_workspace; the mid/full levels\n"
+            "require a one-off CASA export from the public ALMA Science Verification measurement\n"
+            "sets — see data_prep/sdp81/README.md (or set SDP81_URL to a deposit hosting them)."
         )
 
 bench = harness.Benchmark(
