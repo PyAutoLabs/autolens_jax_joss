@@ -27,10 +27,10 @@ workflow; the benchmark times it.
 | Group-scale lensing | `benchmarks/group.py` | `scripts/group/start_here.py` | real group-scale lens |
 | Cluster-scale lensing | `benchmarks/cluster.py` | `scripts/cluster/start_here.py` | Abell 2744 (multiple images) |
 | Weak lensing | `benchmarks/weak.py` | `scripts/weak/start_here.py` | Abell 2744 JWST shape catalogue |
-| Multi-band imaging | `benchmarks/multi_band.py` | `scripts/multi/start_here.py` | JWST COSMOS-Web Ring (4 bands) |
+| Multi-band imaging | `benchmarks/multi_band.py` | `scripts/multi_dataset/start_here.py` | JWST COSMOS-Web Ring (4 bands) |
 | Strong + weak lensing | `benchmarks/strong_and_weak.py` | `scripts/weak/features/strong_lensing/` | Abell 2744 |
-| Imaging + point source | `benchmarks/imaging_and_point_source.py` | `scripts/multi/features/imaging_and_point_source/` | RXJ1131-1231 |
-| Imaging + interferometry | `benchmarks/imaging_and_interferometer.py` | `scripts/multi/features/imaging_and_interferometer/` | SDP.81 |
+| Imaging + point source | `benchmarks/imaging_and_point_source.py` | `scripts/multi_dataset/features/imaging_and_point_source/` | RXJ1131-1231 |
+| Imaging + interferometry | `benchmarks/imaging_and_interferometer.py` | `scripts/multi_dataset/features/imaging_and_interferometer/` | SDP.81 |
 
 Benchmarks not yet listed in `benchmarks/` are being added phase by phase —
 see the tracking issue

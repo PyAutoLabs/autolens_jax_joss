@@ -7,7 +7,7 @@
   "n_likelihood_evals": 4800,
   "max_log_likelihood": 48136.63,
   "benchmark": "multi_band",
-  "paired_example": "scripts/multi/start_here.py",
+  "paired_example": "scripts/multi_dataset/start_here.py",
   "description": "Joint modeling of 4 JWST COSMOS-Web Ring bands: common SIE+shear mass, per-band MGE lens/source emission, free dataset offsets.",
   "quick": false,
   "date": "2026-07-17 07:31 UTC",
