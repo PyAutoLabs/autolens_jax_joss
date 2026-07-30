@@ -8,7 +8,7 @@ COSMOGRAIL time delays) within the same lens model — the analysis pattern
 behind time-delay cosmography.
 
 **Paired workspace example:**
-`autolens_workspace/scripts/multi/features/imaging_and_point_source/modeling.py`
+`autolens_workspace/scripts/multi_dataset/features/imaging_and_point_source/modeling.py`
 fits the identical datasets with the identical model (see it for the
 demonstration-grade noise-map/PSF caveats of the hips2fits imaging).
 
@@ -50,7 +50,7 @@ HIPS2FITS_URL = (
 
 bench = harness.Benchmark(
     name="imaging_and_point_source",
-    paired_example="scripts/multi/features/imaging_and_point_source/modeling.py",
+    paired_example="scripts/multi_dataset/features/imaging_and_point_source/modeling.py",
     description="RXJ1131-1231 joint fit: HST H-band arcs + image positions + time "
     "delays, one SIE+shear mass model.",
     quick=args.quick,

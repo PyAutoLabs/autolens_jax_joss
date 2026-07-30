@@ -8,7 +8,7 @@ fitting the wavelength-dependent lens and source emission in each dataset —
 the paper's demonstration that multiple datasets combine into a single
 differentiable, GPU-accelerated probabilistic model.
 
-**Paired workspace example:** `autolens_workspace/scripts/multi/start_here.py`
+**Paired workspace example:** `autolens_workspace/scripts/multi_dataset/start_here.py`
 uses the identical waveband datasets (fetched from the workspace repository on
 first run) and the identical model family: per-band MGE lens/source emission,
 a shared SIE+shear mass model, and free sub-pixel dataset offsets. (The
@@ -58,7 +58,7 @@ if args.quick:
 
 bench = harness.Benchmark(
     name="multi_band",
-    paired_example="scripts/multi/start_here.py",
+    paired_example="scripts/multi_dataset/start_here.py",
     description=f"Joint modeling of {len(waveband_list)} JWST COSMOS-Web Ring bands: "
     "common SIE+shear mass, per-band MGE lens/source emission, free dataset offsets.",
     quick=args.quick,
@@ -67,7 +67,7 @@ bench = harness.Benchmark(
 """
 __Dataset__
 
-Identical loading to the paired multi/start_here.py: per-band pixel scales,
+Identical loading to the paired multi_dataset/start_here.py: per-band pixel scales,
 extra-galaxies noise scaling, 2.5" mask and radially-binned over sampling.
 """
 dataset_list = []

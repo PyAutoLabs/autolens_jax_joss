@@ -7,7 +7,7 @@
   "n_likelihood_evals": 389421,
   "max_log_likelihood": -9666161.34,
   "benchmark": "imaging_and_point_source",
-  "paired_example": "scripts/multi/features/imaging_and_point_source/modeling.py",
+  "paired_example": "scripts/multi_dataset/features/imaging_and_point_source/modeling.py",
   "description": "RXJ1131-1231 joint fit: HST H-band arcs + image positions + time delays, one SIE+shear mass model.",
   "quick": false,
   "date": "2026-07-17 07:03 UTC",

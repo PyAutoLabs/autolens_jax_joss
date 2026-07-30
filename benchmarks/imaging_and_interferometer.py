@@ -9,7 +9,7 @@ constraining a common SIE+shear mass model with complementary observations of
 the lensed galaxy.
 
 **Paired workspace example:**
-`autolens_workspace/scripts/multi/features/imaging_and_interferometer/`
+`autolens_workspace/scripts/multi_dataset/features/imaging_and_interferometer/`
 teaches the same joint-fit pattern.
 
 **Data:** the imaging half is fetched automatically (CDS hips2fits HST H-band
@@ -68,7 +68,7 @@ if not all((uv_path / f).exists() for f in FILES):
 
 bench = harness.Benchmark(
     name="imaging_and_interferometer",
-    paired_example="scripts/multi/features/imaging_and_interferometer/modeling.py",
+    paired_example="scripts/multi_dataset/features/imaging_and_interferometer/modeling.py",
     description="SDP.81 joint fit: HST H-band imaging + ALMA visibilities, one "
     "SIE+shear mass model, per-dataset source reconstructions.",
     quick=args.quick,
